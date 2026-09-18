@@ -1,82 +1,83 @@
-function leerGastos() {
-    try {
-    const texto = localStorage.getItem("listagastos");
-        return texto ? JSON.parse(texto) : [];
-    } catch (e) {
-        return window.__gastosMemoria || [];
-    }
+// ================================
+// FUNCIONES DE INICIO
+// ================================
+
+// Obtener el sueldo guardado
+function obtenerSueldo() {
+    return Number(localStorage.getItem("sueldo")) || 0;
 }
 
-function guardarGastos(lista) {
-    try {
-        localStorage.setItem("listagastos", JSON.stringify(lista));
-    } catch (e) {
-        window.__gastosMemoria = lista;
-    }
+// Obtener los gastos guardados
+function obtenerGastos() {
+    return JSON.parse(localStorage.getItem("gastos") || "[]");
 }
 
-let gastos = leerGastos();
-let grafico;
+// Calcular el total de gastos
+function totalGastos() {
+    const gastos = obtenerGastos();
 
-function iniciargrafico() {
-    const canvas = document.getElementById('migrafico');
-    if (!canvas) return; // por seguridad
-
-    const ctx = canvas.getContext('2d');
-    
-    const categorias = ['alimento', 'transporte', 'entretenimiento', 'vivienda', 'otros'];
-    const etiquetas = ['Alimentos', 'Transporte', 'Entretenimiento', 'Vivienda', 'Otros'];
-
-    const totales = categorias.map(cat => 
-        gastos.filter(g => g.categoria === cat)
-            .reduce((sum, g) => sum + parseFloat(g.monto || 0), 0)
-    );
-
-    if (grafico) grafico.destroy();
-
-    grafico = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: etiquetas,
-            datasets: [{
-                label: 'Gastos en Bolivianos',
-                data: totales,
-                backgroundColor: ['#4dc0eb', '#ff6384', '#ffce56', '#36a2eb', '#4bc0c0']
-            }]
-        },
-        options: {
-            scales: { 
-                y: { beginAtZero: true }
-            }
-        }
-    });
+    return gastos.reduce(function(total, gasto) {
+        return total + Number(gasto.monto);
+    }, 0);
 }
 
-window.onload = function() {
-    
-    const form = document.getElementById("formgastos");
-    
-    if (form) {
-        form.addEventListener("submit", function(e) {
-            e.preventDefault();
+// Guardar el sueldo
+function guardarSueldo() {
+    const input = document.getElementById("sueldo");
+    const sueldo = Number(input.value);
 
-            const nuevogasto = {
-                descripcion: document.getElementById("descripcion").value,
-                monto: parseFloat(document.getElementById("monto").value),
-                categoria: document.getElementById("categoria").value,
-                fecha: document.getElementById("fecha").value
-            };
-
-            gastos.push(nuevogasto);
-            guardarGastos(gastos);          
-            this.reset();
-            iniciargrafico();
-            alert("Gasto agregado y estadísticas actualizadas");
-        });
-    } else {
-        console.error("No se encontró el formulario con id 'formgastos'");
+    if (sueldo < 0 || isNaN(sueldo)) {
+        alert("Ingresa un sueldo válido.");
+        return;
     }
 
-    
-    iniciargrafico();
-};
+    localStorage.setItem("sueldo", sueldo);
+
+    actualizarInicio();
+}
+
+// Actualizar los datos de la página de inicio
+function actualizarInicio() {
+    const sueldo = obtenerSueldo();
+    const gastos = totalGastos();
+    const saldo = sueldo - gastos;
+
+    document.getElementById("mostrarsueldo").textContent =
+        sueldo.toFixed(2);
+
+    document.getElementById("mostrargastos").textContent =
+        gastos.toFixed(2);
+
+    document.getElementById("saldo").textContent =
+        saldo.toFixed(2);
+}
+
+// Guardar meta de ahorro
+function guardarMeta() {
+    const meta = document.getElementById("metaAhorro").value;
+
+    localStorage.setItem("metaAhorro", meta);
+}
+
+// Cargar meta guardada
+function cargarMeta() {
+    const meta = localStorage.getItem("metaAhorro") || "";
+
+    document.getElementById("metaAhorro").value = meta;
+}
+
+// Iniciar página
+function iniciarInicio() {
+    cargarMeta();
+    actualizarInicio();
+
+    document
+        .getElementById("btnguardarsueldo")
+        .addEventListener("click", guardarSueldo);
+
+    document
+        .getElementById("metaAhorro")
+        .addEventListener("change", guardarMeta);
+}
+
+document.addEventListener("DOMContentLoaded", iniciarInicio);
