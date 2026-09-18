@@ -1,0 +1,188 @@
+*,
+::after,
+::before{
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: "Plus Jakarta Sans", sans-serif;
+    position: relative;
+    background-image: url(como-ganar-con-tu-cuenta-destacada.jpg);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.nav{
+    height: 135px;
+    background-color:  #3AB397;
+    font-size: 20px;
+}
+.nav-container{
+    width: min(90%, 1200px);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    --icon-toggle-menu:url("menu.svg");
+    --transform-menu-show: translate(-100%);
+}
+.nav-container:has(.nav-input:checked){
+    --icon-toggle-menu:url("x-circle.svg");
+    --transform-menu-show: translate(0);
+}
+
+.nav-figure, .nav-toggle{
+    z-index: 10;
+}
+
+.nav-input{
+    display: none;
+}
+.menu-icono{
+    border-radius: 10px;
+    margin-top: 60px;
+    width: 120px;
+    box-shadow: 0 0 10px rgb(0, 0, 0);
+}
+.nav-toggle{
+    margin-top: 45px;
+    width: 80px;
+    height: 85px;
+    background-image: var(--icon-toggle-menu);
+    background-size: cover;
+    cursor: pointer;
+    transition: background-image .5s;
+}
+.nav-input{
+    width: 40px;
+    height: 40px;
+}
+.nav-list{
+    transform: var(--transform-menu-show);
+    position: fixed;
+    inset: 0;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    gap: 2rem;
+    text-align: center;
+    padding: 1.5rem 5%;
+    background-color:#3AB397;
+    list-style: none;
+    transition: .5s transform;
+}
+.nav-link{
+    color: black;
+    text-decoration: none;
+}
+
+@media(width > 564px){
+    .nav-container{
+        --transform-menu-show: translate(0);
+    }
+    .nav-toggle{
+        display: none;
+    }
+    .nav-list{
+        position: static;
+        grid-auto-flow: column;
+        place-content: unset;
+        padding: 0;
+        transition: unset;
+    }
+}
+
+
+.header{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    padding: 1.5rem;
+    font-size: 29px;
+}
+.container-inicio{
+    border-radius: 10px;
+    background-color: rgb(96, 214, 163);;
+    width: 500px;
+    margin: 30px auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.973);
+    align-items: center;
+    justify-content: center;
+    display: grid;
+    gap: 1.5 rem;
+    padding: 1.5rem;
+    flex-direction: column;
+}
+.inicio{
+    margin: 30px 0 0 0;
+    
+    font-size: 28px;
+    width: 450px;
+    line-height: 1.5;
+}
+
+.metas{
+    
+    margin: 60px 0 0 0;
+    font-size: 25px;
+}
+.text{
+    border-radius: 5px;
+    width: 260px;
+    height: 30px;
+    font-size: 1.2rem;
+}
+.texto{
+    border-radius: 5px;
+    width: 400;
+    height: 80px;
+    font-size: 2.1rem;
+}
+.titulo{
+    align-items: center;
+    justify-content: center;
+    display: grid;
+}
+.but{
+    width: 150px;
+    height: 35px;
+    margin: 15px auto;
+    justify-content: center;
+    align-items: center;
+}
+.resumen-directo{
+    
+    align-items: center;
+    justify-content: space-between;
+}
+.dinero{
+    width: 200px;
+    display: flex;
+    margin-left:  auto;
+    margin-top: 20px;
+    margin-right: 15px;
+    
+}
+.dineroo{
+    margin-left: auto;
+    width: 200px;
+}
+.imag{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.973);
+    position: absolute; 
+    float: right;
+    border-radius: 15px;
+    top: 135px;                   
+    right: 100;                 
+    width: 100%;               
+    z-index: 20;
+    background-repeat: no-repeat;
+}
+.grafico-contenedor {
+    width: 100%;
+    max-width: 600px;
+    height: 350px;
+    margin: 30px auto;
+}
+

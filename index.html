@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="stale.css">
+</head>
+<body>
+    <div class="container" method="post">
+        <div class="container-form">
+            <form class="info">
+                <h1>Finanzas Personales</h1>
+                <div class="fila">
+                    <p>Bienvenido/a. Aquí puedes anotar cada producto que compres desde el día que recibes tu sueldo hasta que llega el siguiente. Lleva tu registro día a día sin perder detalle de nada.</p>
+                    <p>Cuando termine el periodo, verás de forma clara:</p>
+                    <p>✅ La lista completa con todos los artículos que compraste</p>
+                    <p>✅ Cuánto gastaste en total y cuánto lograste ahorrar</p>
+                    <p>✅ Si gastaste más o menos en comparación con el mes anterior</p>
+                    <p>Sin cálculos complicados ni papeles que se pierdan. Solo anota tus compras, y al final tendrás todo resumido para que sepas exactamente en qué se fue tu dinero y cómo mejorar. 💸</p>
+                    
+                </div>
+            </form>
+        </div>
+        <div class="container-form">
+            <form class="sign-up" action="ingreso.php" method="post">
+                <h2>Inicio de Sesion</h2> 
+                <div class="listas2">
+                    <div class="suel">
+                        <input type="text" placeholder="ingrese su sueldo">
+                        
+                    </div>
+                    <div class="suel">
+                        <input type="text" placeholder="ingrese su email">   
+                    </div>
+                    <div class="suel">
+                        <input type="text" placeholder="ingrese su nombre">   
+                    </div>
+                    <div class="suel">
+                        <input type="text" placeholder="ingrese una contraseña">
+                    </div>
+                    <button class="button" type="submit" id="miboton">iniciar</button>
+                </div>
+            </form>
+        </div>
+        <div class="container-welcome">
+            <div class="welcome-sign-up welcome">
+                <h3>!Bienvenido¡</h3>
+                <p>ingrese sus datos personales</p>
+                <button class="button" id="btn-sign-up">comenzar</button>
+            </div>
+            <div class="welcome-info welcome">
+                <h3>!hola!</h3>
+                <p>Conoce cómo funciona antes de empezar                                                                                                        </p>
+                <button class="button" id="btn-info">atras</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>

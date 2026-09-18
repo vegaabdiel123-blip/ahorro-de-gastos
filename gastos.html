@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="stile.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-container">
+            <figure class="nav-figure">
+                <img src="9356ee3b2b245b8229ce0e3d01c718c5.jpg" class="menu-icono" alt="">
+            </figure>
+            <label class="nav-toggle">
+                <input type="checkbox" id="menu-input" class="nav-input">
+            </label>
+            <ul class="nav-list" id="menu">
+                <li class="nav-item"><a href="tarea2.html" class="nav-link"> inicio</a></li>
+                <li class="nav-item"><a href="presupuesto.html" class="nav-link"> presupuesto</a></li>
+                <li class="nav-item"><a href="informe.html" class="nav-link"> informe</a></li>
+                <li class="nav-item"><a href="gastos.html" class="nav-link"> gastos</a></li>
+                <li class="nav-item"><a href="practicas.html" class="nav-link"> lista de gastos</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="container-inicio">
+        <div class="inicio">
+            <form id="formgastos">
+            <div class="ingres"> <h2>ingresar nuevo gasto</h2></div>   
+                <p>descripción: <input type="text" id="descripcion" required class="text"></p>
+                <p>monto: <input type="number" id="monto" min="0" step="0.01" required class="text"></p>
+                <p>categoría:
+                    <select id="categoria" class="text">
+                        <option value="alimento">alimento</option>
+                        <option value="transporte">transporte</option>
+                        <option value="entretenimiento">entretenimiento</option>
+                        <option value="vivienda">vivienda</option>
+                        <option value="otros">otros</option>
+                    </select>
+                </p> 
+                <p>fecha: <input type="date" id="fecha" class="text"></p>
+                <button class="but" type="submit">agregar gastos</button>
+            </form>
+        </div>
+        <div class="metas">
+            <h2 class="titulo">lista de gastos</h2>
+            <h3>lista</h3>
+            <button class="but" id="btnverlistas">ver listas</button>
+            <div id="contenedorlista" style="margin-top:15px; display:none;">
+                <table id="tablagastos">
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Descripción</th>
+                        <th>Categoría</th>
+                        <th>Monto (Bs)</th>
+                    </tr>
+                </table>
+                <p><strong>Total gastado: Bs <span id="totalgastos">0.00</span></strong></p>
+            </div>
+        </div>
+    </section>
+    <script src="tarea2.js"></script>
+</body>
+</html>
