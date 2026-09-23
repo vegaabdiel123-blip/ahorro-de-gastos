@@ -105,7 +105,7 @@ window.onload = function() {
             const sueldo = parseFloat(valor) || 0;
             localStorage.setItem('sueldo', sueldo);
             actualizarResumen();
-            alert('Sueldo guardado correctamente ✅');
+            alert('Sueldo guardado correctamente ');
         });
     }
 
@@ -130,7 +130,7 @@ window.onload = function() {
             this.reset();
             
             if (campoFecha) campoFecha.value = new Date().toISOString().split('T')[0];
-            alert('Gasto agregado ✅');
+            alert('Gasto agregado ');
         });
     } else {
         console.error('No se encontró el formulario #formgastos');
@@ -167,13 +167,13 @@ window.onload = function() {
         });
     }
 };
-// ===== FUNCIONES PARA GENERAR INFORMES =====
+
 
 function obtenerFechaHoy() {
   return new Date().toISOString().split('T')[0]; // formato: 2026-09-22
 }
 
-// INFORME DIARIO
+
 function generarInformeDiario() {
     const hoy = obtenerFechaHoy();
     const gastosHoy = gastos.filter(g => g.fecha === hoy);
@@ -203,7 +203,7 @@ function generarInformeDiario() {
     return html;
 }
 
-// INFORME SEMANAL
+
 function generarInformeSemanal() {
     const hoy = new Date();
     const hace7dias = new Date();
@@ -219,7 +219,7 @@ function generarInformeSemanal() {
     let html = `<h3>📆 Informe Semanal — Últimos 7 días</h3>`;
     html += `<p><strong>Total gastado: Bs ${total.toFixed(2)}</strong></p>`;
     
-    // Totales por categoría
+    
     const categorias = ['alimento', 'transporte', 'entretenimiento', 'vivienda', 'otros'];
     html += `<h4>Por categoría:</h4><ul>`;
     categorias.forEach(cat => {
@@ -230,12 +230,12 @@ function generarInformeSemanal() {
     html += `</ul>`;
     
     if (gastosSemana.length === 0) {
-    html += `<p>No hay gastos en la última semana ✅</p>`;
+    html += `<p>No hay gastos en la última semana </p>`;
     }
     return html;
 }
 
-// INFORME MENSUAL
+
 function generarInformeMensual() {
     const hoy = new Date();
     const mesActual = hoy.getMonth();
@@ -256,7 +256,7 @@ function generarInformeMensual() {
     html += `<p><strong>Gastos: Bs ${total.toFixed(2)}</strong></p>`;
     html += `<p>Saldo: <strong style="color:${saldo >= 0 ? 'green' : 'red'};">Bs ${saldo.toFixed(2)}</strong></p>`;
 
-  // Por categoría
+  
     const categorias = ['alimento', 'transporte', 'entretenimiento', 'vivienda', 'otros'];
     html += `<h4>Desglose por categoría:</h4><ul>`;
     categorias.forEach(cat => {
@@ -275,7 +275,7 @@ function generarInformeMensual() {
     return html;
 }
 
-// CARGAR INFORMES AL ENTRAR A LA PÁGINA
+
 document.addEventListener('DOMContentLoaded', function() {
   // Cuando se muestre la página de informes
     const observador = new MutationObserver(() => {
@@ -294,18 +294,18 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-// ===== ESTADÍSTICAS COMPLETAS =====
+
 function iniciargrafico() {
     const canvas = document.getElementById('migrafico');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
 
-    // Categorías y colores
+    
     const categorias = ['alimento', 'transporte', 'entretenimiento', 'vivienda', 'otros'];
     const etiquetas = ['Alimentos', 'Transporte', 'Entretenimiento', 'Vivienda', 'Otros'];
     const colores = ['#4dc0eb', '#ff6384', '#ffce56', '#36a2eb', '#4bc0c0'];
     
-    // Calcular totales
+    
     const totales = categorias.map(cat =>
         gastos.filter(g => g.categoria === cat)
             .reduce((sum, g) => sum + parseFloat(g.monto || 0), 0)
@@ -315,10 +315,10 @@ function iniciargrafico() {
 
 
     
-    // Destruir gráfico anterior si existe
+    
     if (grafico) grafico.destroy();
 
-    // Crear gráfico combinado
+    
     grafico = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -365,7 +365,7 @@ function iniciargrafico() {
         }
     });
 
-    // Mostrar resumen numérico debajo del gráfico
+ 
     const contenedor = document.querySelector('.grafico-contenedor');
     if (contenedor) {
         let resumenHTML = `<div style="margin-top:20px; padding:15px; background:#f8f9fa; border-radius:10px;">
@@ -395,7 +395,7 @@ function iniciargrafico() {
             </p>
         </div>`;
         
-        // Reemplazar o agregar el resumen
+        
         const viejoResumen = document.getElementById('resumen-estadisticas');
         if (viejoResumen) viejoResumen.remove();
         contenedor.insertAdjacentHTML('beforeend', `<div id="resumen-estadisticas">${resumenHTML}</div>`);
