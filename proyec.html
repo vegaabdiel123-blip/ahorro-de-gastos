@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="stilesd.css">
+    <link rel="stylesheet" href="stalns.css">
 </head>
 <body>
     <div class="app">
@@ -20,9 +20,9 @@
                     <div class="nav-list">
                         
                         <button class="nav-item" onclick="showPage('dashboard',this)" >inicio</button>
-                        <button  onclick="showPage('gastoo',this)" >gasto</button>
-                        <button  onclick="showPage('informee',this)" >informe</button>
-                        <button  onclick="showPage('estadistica',this)" >estadistica</button>
+                        <button class="nav-item" onclick="showPage('gastoo',this)" >gasto</button>
+                        <button class="nav-item" onclick="showPage('informee',this)" >informe</button>
+                        <button class="nav-item" onclick="showPage('estadistica',this)" >estadistica</button>
 
                     </div>
                 </div>
@@ -59,16 +59,7 @@
                     <input type="text" class="texto">
                 </div>
             </section>
-            <nav class="nav">
-                <div class="nav-container">
-                    <figure class="nav-figure">
-                        <img src="9356ee3b2b245b8229ce0e3d01c718c5.jpg" class="menu-icono" alt="">
-                    </figure>
-                    <label class="nav-toggle">
-                        <input type="checkbox" id="menu-input" class="nav-input">
-                    </label>
-                </div>
-            </nav>
+
 
         </div>
 
@@ -111,70 +102,87 @@
             </section>
         </div>
 
-        <div class="page" id="informee">
-            <nav class="nav">
-                <div class="nav-container">
-                    <figure class="nav-figure">
-                        <img src="9356ee3b2b245b8229ce0e3d01c718c5.jpg" class="menu-icono" alt="">
-                    </figure>
-                    <label class="nav-toggle">
-                        <input type="checkbox" id="menu-input" class="nav-input">
-                    </label>
-                </div>
-            </nav>
-            <header class="header">
-                <div class="header-content container">
-                    <div class="header-info">
-                        <h1>informes</h1>
-                        <p></p>
-                    </div>
-                </div>
-            </header>
-            <section class="container-inicio">
-                <div class="inicio">
-                    <div class="diario">
-                        <h2>informe diario</h2>
-                    </div>
-                    <div class="semanal">
-                        <h2>informe semanal</h2>
-                    </div>
-                    <div class="mensual">
-                        <h2>informe mensual</h2>
-                    </div>
-                </div>
-            </section>
-
-        </div>
-
         <div class="page" id="estadistica">
             <nav class="nav">
                 <div class="nav-container">
-                    <figure class="nav-figure">
-                        <img src="9356ee3b2b245b8229ce0e3d01c718c5.jpg" class="menu-icono" alt="">
-                    </figure>
-                    <label class="nav-toggle">
-                        <input type="checkbox" id="menu-input" class="nav-input">
-                    </label>
+                <figure class="nav-figure">
+                    <img src="icono-menu.jpg" class="menu-icono" alt="">
+                </figure>
+                <label class="nav-toggle">
+                    <input type="checkbox" class="nav-input">
+                </label>
                 </div>
             </nav>
+
             <header class="header">
                 <div class="inicio">
-                    <div class="header-info">
-                        <h1>estadistica mensual</h1>
-                        <p></p>
-                    </div>
+                <div class="header-info">
+                    <h1>Estadísticas Mensuales</h1>
+                    <p>Análisis de tus gastos por categoría</p>
+                </div>
                 </div>
             </header>
+
             <section class="container-inicio">
-                <div class="grafico-contenedor">
+                <div class="grafico-contenedor" style="width: 90%; max-width: 700px; margin: 0 auto; padding: 20px; background: #fff; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                <div style="position: relative; height: 350px;">
                     <canvas id="migrafico"></canvas>
                 </div>
+                <!-- El resumen numérico se agrega automáticamente aquí -->
+                </div>
             </section>
+        </div>
+
+        <div class="page" id="informee">
+            <nav class="nav">
+                <div class="nav-container">
+                <figure class="nav-figure">
+                    <img src="icono-menu.jpg" class="menu-icono" alt="">
+                </figure>
+                <label class="nav-toggle">
+                    <input type="checkbox" class="nav-input">
+                </label>
+                </div>
+            </nav>
+
+            <header class="header">
+                <div class="header-content container">
+                <div class="header-info">
+                    <h1>Informes</h1>
+                    <p>Resumen de tus gastos</p>
+                </div>
+                </div>
+            </header>
+
+            <section class="container-inicio">
+                <div class="inicio">
+                <div class="diario" style="margin-bottom:25px; padding:15px; background:#f9f9f9; border-radius:8px;">
+                    <h2>Informe Diario</h2>
+                    <button class="but" id="btnverlistas">ver informe</button>
+                    <div></div>
+                </div>
+
+                <div class="semanal" style="margin-bottom:25px; padding:15px; background:#f0f8ff; border-radius:8px;">
+                    <h2>Informe Semanal</h2>
+                    <button class="but" id="btnverlistas">ver informe</button>
+                    <div></div>
+                </div>
+
+                <div class="mensual" style="margin-bottom:25px; padding:15px; background:#fff8e1; border-radius:8px;">
+                    <h2>Informe Mensual</h2>
+                    <button class="but" id="btnverlistas">ver informe</button>
+                    <div></div>
+                </div>
+                </div>
+            </section>
+            </div>
 
         </div>
 
+
+
     </div>
 
-    <script src="tarea2.js"></script>
+    <script src="proyec.js"></script>
 </body>
 </html>

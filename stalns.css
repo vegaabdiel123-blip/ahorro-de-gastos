@@ -187,4 +187,9 @@ body{
     height: 350px;
     margin: 30px auto;
 }
-
+.nav-item{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.973);
+    background-color:  #26f2c2;
+    border-bottom: none;
+    
+}
