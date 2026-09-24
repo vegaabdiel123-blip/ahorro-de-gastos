@@ -167,13 +167,13 @@ window.onload = function() {
         });
     }
 };
-// ===== FUNCIONES PARA GENERAR INFORMES =====
+
 
 function obtenerFechaHoy() {
   return new Date().toISOString().split('T')[0]; // formato: 2026-09-22
 }
 
-// INFORME DIARIO
+
 function generarInformeDiario() {
     const hoy = obtenerFechaHoy();
     const gastosHoy = gastos.filter(g => g.fecha === hoy);
@@ -203,7 +203,7 @@ function generarInformeDiario() {
     return html;
 }
 
-// INFORME SEMANAL
+
 function generarInformeSemanal() {
     const hoy = new Date();
     const hace7dias = new Date();
@@ -219,7 +219,7 @@ function generarInformeSemanal() {
     let html = `<h3>📆 Informe Semanal — Últimos 7 días</h3>`;
     html += `<p><strong>Total gastado: Bs ${total.toFixed(2)}</strong></p>`;
     
-    // Totales por categoría
+    
     const categorias = ['alimento', 'transporte', 'entretenimiento', 'vivienda', 'otros'];
     html += `<h4>Por categoría:</h4><ul>`;
     categorias.forEach(cat => {
@@ -235,7 +235,7 @@ function generarInformeSemanal() {
     return html;
 }
 
-// INFORME MENSUAL
+
 function generarInformeMensual() {
     const hoy = new Date();
     const mesActual = hoy.getMonth();
@@ -256,7 +256,7 @@ function generarInformeMensual() {
     html += `<p><strong>Gastos: Bs ${total.toFixed(2)}</strong></p>`;
     html += `<p>Saldo: <strong style="color:${saldo >= 0 ? 'green' : 'red'};">Bs ${saldo.toFixed(2)}</strong></p>`;
 
-  // Por categoría
+  
     const categorias = ['alimento', 'transporte', 'entretenimiento', 'vivienda', 'otros'];
     html += `<h4>Desglose por categoría:</h4><ul>`;
     categorias.forEach(cat => {
@@ -275,9 +275,9 @@ function generarInformeMensual() {
     return html;
 }
 
-// CARGAR INFORMES AL ENTRAR A LA PÁGINA
+
 document.addEventListener('DOMContentLoaded', function() {
-  // Cuando se muestre la página de informes
+  
     const observador = new MutationObserver(() => {
     if (document.getElementById('informee').style.display !== 'none') {
         const diario = document.querySelector('.diario');
@@ -294,110 +294,4 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-// ===== ESTADÍSTICAS COMPLETAS =====
-function iniciargrafico() {
-    const canvas = document.getElementById('migrafico');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
 
-    // Categorías y colores
-    const categorias = ['alimento', 'transporte', 'entretenimiento', 'vivienda', 'otros'];
-    const etiquetas = ['Alimentos', 'Transporte', 'Entretenimiento', 'Vivienda', 'Otros'];
-    const colores = ['#4dc0eb', '#ff6384', '#ffce56', '#36a2eb', '#4bc0c0'];
-    
-    // Calcular totales
-    const totales = categorias.map(cat =>
-        gastos.filter(g => g.categoria === cat)
-            .reduce((sum, g) => sum + parseFloat(g.monto || 0), 0)
-    );
-    
-    const totalGeneral = totales.reduce((a, b) => a + b, 0);
-
-
-    
-    // Destruir gráfico anterior si existe
-    if (grafico) grafico.destroy();
-
-    // Crear gráfico combinado
-    grafico = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: etiquetas,
-            datasets: [
-                {
-                    label: 'Gastos en Bolivianos',
-                    data: totales,
-                    backgroundColor: colores,
-                    borderWidth: 2,
-                    borderColor: '#fff'
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: { display: false },
-                tooltip: {
-                    callbacks: {
-                        label: function(item) {
-                            const valor = item.raw;
-                            const porcentaje = totalGeneral > 0 
-                                ? ((valor / totalGeneral) * 100).toFixed(1) 
-                                : 0;
-                            return `Bs ${valor.toFixed(2)} (${porcentaje}%)`;
-                        }
-                    }
-                },
-                title: {
-                    display: true,
-                    text: `Total Gastado: Bs ${totalGeneral.toFixed(2)}`,
-                    font: { size: 18, weight: 'bold' },
-                    color: '#2c3e50'
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: { callback: v => 'Bs ' + v }
-                }
-            }
-        }
-    });
-
-    // Mostrar resumen numérico debajo del gráfico
-    const contenedor = document.querySelector('.grafico-contenedor');
-    if (contenedor) {
-        let resumenHTML = `<div style="margin-top:20px; padding:15px; background:#f8f9fa; border-radius:10px;">
-            <h3>📊 Desglose por Categoría</h3>
-            <table style="width:100%; border-collapse:collapse; margin-top:10px;">
-                <tr style="background:#e9ecef;">
-                    <th style="padding:10px; text-align:left; border-bottom:2px solid #dee2e6;">Categoría</th>
-                    <th style="padding:10px; text-align:right; border-bottom:2px solid #dee2e6;">Monto (Bs)</th>
-                    <th style="padding:10px; text-align:right; border-bottom:2px solid #dee2e6;">%</th>
-                </tr>`;
-        
-        totales.forEach((monto, i) => {
-            const porcentaje = totalGeneral > 0 ? ((monto / totalGeneral) * 100).toFixed(1) : 0;
-            resumenHTML += `<tr>
-                <td style="padding:8px; border-bottom:1px solid #dee2e6;">
-                    <span style="display:inline-block; width:12px; height:12px; background:${colores[i]}; border-radius:3px; margin-right:8px;"></span>
-                    ${etiquetas[i]}
-                </td>
-                <td style="padding:8px; text-align:right; border-bottom:1px solid #dee2e6;">${monto.toFixed(2)}</td>
-                <td style="padding:8px; text-align:right; border-bottom:1px solid #dee2e6;">${porcentaje}%</td>
-            </tr>`;
-        });
-        
-        resumenHTML += `</table>
-            <p style="margin-top:15px; font-size:16px;">
-                <strong>Total General: Bs ${totalGeneral.toFixed(2)}</strong>
-            </p>
-        </div>`;
-        
-        // Reemplazar o agregar el resumen
-        const viejoResumen = document.getElementById('resumen-estadisticas');
-        if (viejoResumen) viejoResumen.remove();
-        contenedor.insertAdjacentHTML('beforeend', `<div id="resumen-estadisticas">${resumenHTML}</div>`);
-    }
-}
