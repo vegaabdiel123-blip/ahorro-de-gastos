@@ -105,7 +105,7 @@ window.onload = function() {
             const sueldo = parseFloat(valor) || 0;
             localStorage.setItem('sueldo', sueldo);
             actualizarResumen();
-            alert('Sueldo guardado correctamente ✅');
+            alert('Sueldo guardado correctamente ');
         });
     }
 
@@ -130,7 +130,7 @@ window.onload = function() {
             this.reset();
             
             if (campoFecha) campoFecha.value = new Date().toISOString().split('T')[0];
-            alert('Gasto agregado ✅');
+            alert('Gasto agregado ');
         });
     } else {
         console.error('No se encontró el formulario #formgastos');
@@ -170,7 +170,7 @@ window.onload = function() {
 
 
 function obtenerFechaHoy() {
-  return new Date().toISOString().split('T')[0]; // formato: 2026-09-22
+return new Date().toISOString().split('T')[0]; 
 }
 
 
@@ -230,7 +230,7 @@ function generarInformeSemanal() {
     html += `</ul>`;
     
     if (gastosSemana.length === 0) {
-    html += `<p>No hay gastos en la última semana ✅</p>`;
+    html += `<p>No hay gastos en la última semana </p>`;
     }
     return html;
 }
@@ -256,7 +256,7 @@ function generarInformeMensual() {
     html += `<p><strong>Gastos: Bs ${total.toFixed(2)}</strong></p>`;
     html += `<p>Saldo: <strong style="color:${saldo >= 0 ? 'green' : 'red'};">Bs ${saldo.toFixed(2)}</strong></p>`;
 
-  
+
     const categorias = ['alimento', 'transporte', 'entretenimiento', 'vivienda', 'otros'];
     html += `<h4>Desglose por categoría:</h4><ul>`;
     categorias.forEach(cat => {
@@ -277,7 +277,7 @@ function generarInformeMensual() {
 
 
 document.addEventListener('DOMContentLoaded', function() {
-  
+
     const observador = new MutationObserver(() => {
     if (document.getElementById('informee').style.display !== 'none') {
         const diario = document.querySelector('.diario');
@@ -292,6 +292,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     observador.observe(document.getElementById('informee'), { attributes: true, attributeFilter: ['style'] });
 });
+
 
 
 
